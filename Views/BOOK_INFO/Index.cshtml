@@ -1,0 +1,163 @@
+﻿@using WebApplication3.Models;
+@model IEnumerable<WebApplication3.Models.BOOK_INFO>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm("Index", "Book_info", FormMethod.Post, new { id = "searchForm", @class = "form-inline", @style = "text-align:center" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-inline" style="text-align:center">
+        @Html.DropDownList("SearchKeyList", ViewBag.SearchKeyList as IEnumerable<SelectListItem>, new { @class = "form-control" })
+        @*<select class="form-control">
+                <option>isbn</option>
+                <option>图书名</option>
+                <option>类型</option>
+            </select>*@
+        @Html.TextBox("searchString", "", htmlAttributes: new { @class = "form-control" })
+
+        <input type="hidden" id="PageIndex" name="PageIndex" value="0" />
+        @*<button type="submit" class="btn btn-default" onclick="document.forms['booksearch'].submit();">搜索</button>*@
+        <input type="submit" class="form-control" id="searchButton" value="检索" />
+    </div>
+
+}
+<hr />
+
+<h2>
+    图书列表
+</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ISBN)
+        </th>
+        <th>
+            图书名
+        </th>
+        <th>
+            库存量
+        </th>
+        <th>
+            类型
+        </th>
+        <th></th>
+    </tr>
+
+    @if (Request.IsAuthenticated == false)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ISBN)
+                </td>
+                <td>
+                    @Html.ActionLink(item.BOOKNAME, "MoreDetails", new { id = item.ISBN })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.STOCK)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MAJOR)
+                </td>
+                <td>
+                    @Html.ActionLink("收藏", "Edit", new { id = item.ISBN }) |
+                    @Html.ActionLink("状态信息", "Details", new { id = item.ISBN })
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+
+        Model1 db = new Model1();
+        var member = db.MEMBERS.SqlQuery("select * from MEMBERS where MEMBERNAME='" + User.Identity.Name + "'");
+        var collecting = member.ToList().First().BOOKS;
+
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ISBN)
+                </td>
+                <td>
+                    @Html.ActionLink(item.BOOKNAME, "MoreDetails", new { id = item.ISBN })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.STOCK)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MAJOR)
+                </td>
+                <td>
+                    @{ 
+                            bool IsCollect = false;
+                            foreach (var iter in collecting)
+                            {
+                                if (iter.ISBN == item.ISBN)
+                                {
+                                    IsCollect = true;
+                                    break;
+                                }
+                            }
+                            if (IsCollect)
+                            {
+                                <font color="red">已收藏</font>
+                            }
+                            else
+                            {
+                                @Html.ActionLink("收藏", "Edit", new { id = item.ISBN })
+                            }
+                        }
+                    |
+                    @Html.ActionLink("状态信息", "Details", new { id = item.ISBN })
+
+                </td>
+            </tr>
+        }
+
+    }
+
+
+</table>
+
+<div id="pagebar">
+    @for (var i = 0; i < ViewBag.PageCount; i++)
+    {
+        if (i == ViewBag.PageIndex)
+        {
+            <span class="currentpagenumber">@(i + 1)</span>
+        }
+        else
+        {
+            <a class="pagenumber" href="javascript:;">@(i + 1)</a>
+        }
+    }
+</div>
+
+@section scripts {
+    <script>
+        function submitForm(pagenumber) {
+            pagenumber = parseInt(pagenumber, 10);
+            $('#PageIndex').val(pagenumber - 1);
+            $('#searchForm').submit();
+        }
+
+        $(function () {
+
+            $('#searchButton').click(function () {
+                submitForm($('#pagebar .currentpagenumber').text());
+            });
+
+            $('#pagebar .pagenumber').click(function () {
+                submitForm($(this).text());
+            });
+
+        });
+
+
+    </script>
+}

@@ -1,0 +1,79 @@
+﻿@model WebApplication3.Models.BOOKCOMMERCIAL
+
+@{
+    ViewBag.Title = "MoreDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="padding:5%">图书详情</h2>
+
+
+<div>
+    <div style="width:30%;height:400px;float:left">
+        <div style="text-align:center">
+            <img src="@Html.DisplayFor(model => model.URL)" width="215" />
+        </div>
+
+    </div>
+
+    <div style="width:70%;height:auto;float:left">
+        <div>
+            <font size="4">
+
+                <dl class="dl-horizontal">
+                    <dt>书名</dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.BOOKNAME)
+                    </dd>
+                    <dt>作者</dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.WRITER)
+                    </dd>
+                    <dt>ISBN</dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.ISBN)
+                    </dd>
+                    <dt>出版商</dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.PUBLISHER)
+                    </dd>
+                    <dt>页数</dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.PAGENUM)
+                    </dd>
+                    <dt>出版时间</dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.PUBLISHTIME)
+                    </dd>
+                    <dt>价格</dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.PRICE)
+                    </dd>
+                    <dt>豆瓣评分</dt>
+                    <dd>
+                        <font color="green" size="7">
+                            @Html.DisplayFor(model => model.RATE)
+                        </font>
+                    </dd>
+                    <dt>概述</dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.DETAIL)
+                    </dd>
+
+
+                </dl>
+
+
+
+
+
+            </font>
+        </div>
+    </div>
+</div>
+<br/>
+
+<p>
+    @Html.ActionLink("收藏", "Edit", new { id = Model.ISBN }) |
+    @Html.ActionLink("回到图书界面", "Index")
+</p>

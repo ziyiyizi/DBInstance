@@ -1,0 +1,66 @@
+﻿@model IEnumerable<WebApplication3.Models.BOOKRERSERVATION>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Member/MainPage.cshtml";
+}
+
+<h2>我的预约图书</h2>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ISBN)
+            </th>
+            <th>
+                图书名
+            </th>
+            <th>
+                预约时间
+            </th>
+            <th>
+                截至时间
+            </th>
+            <th>
+                预约状态
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ISBN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BOOK.BOOKNAME)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RESERVETIME)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DEADLINE)
+            </td>
+            <td>
+                @{
+                    if (item.RESERVESTATE == 0)
+                    {
+                        <font color="red">处理中</font>
+                    }
+                    else
+                    {
+                        <font color="green">成功</font>
+                    }
+                }
+            </td>
+            <td>
+                @Html.ActionLink("取消预约", "Edit", new { id=item.ISBN  }) |
+                @Html.ActionLink("详细信息", "Details", new {  id=item.ISBN  })
+                
+            </td>
+        </tr>
+        }
+
+    </table>
+    </div>

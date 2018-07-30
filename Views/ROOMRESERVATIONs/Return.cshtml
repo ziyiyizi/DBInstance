@@ -1,0 +1,49 @@
+﻿@model IEnumerable<WebApplication3.Models.ROOMRESERVATION>
+@{
+    ViewBag.Title = "Return";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>归还图书室</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                图书室ID
+            </th>
+            <th>
+                预约时间
+            </th>
+            <th>
+                截至时间
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.STUDYROOM.ROOMID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RESERVETIME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DEADLINE)
+                </td>
+                @*<td>
+                    @Html.ActionLink("使用房间", "ReturnRoom", new { MEMBERID = item.MEMBERID, ROOMID = item.ROOMID, RESERVETIME = item.RESERVETIME }) |
+                    @Html.ActionLink("归还房间","ReturnRoom", new { MEMBERID = item.MEMBERID, ROOMID = item.ROOMID, RESERVETIME = item.RESERVETIME })
+                </td>*@
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    @Html.ActionLink("返回", "Index")
+</div>
+

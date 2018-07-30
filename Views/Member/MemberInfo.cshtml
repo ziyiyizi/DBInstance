@@ -1,0 +1,61 @@
+﻿@model WebApplication3.Models.MEMBER
+
+@{
+    Layout = "~/Views/Member/MainPage.cshtml";
+}
+<h2 class="sub-header">个人资料</h2>
+<hr class="featurette-divider" />
+<div style="width:300px;height:auto;float:left">
+    <div style="text-align:center">
+        <img style="text-align:center" class="img-circle" src="~/src/user-pic.png" alt="Generic placeholder image" width="150" height="150">
+        <p><font color="brown"><h2 style="font-family:Castellar;font-weight:800;">@User.Identity.Name</h2></font></p>
+    </div>
+</div>
+
+<div style="width:400px;height:auto;float:left">
+
+
+    <div class="col-xs-6 col-sm-3 col-lg-offset-4">
+
+        <dl class="" style="font-size:15px;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">
+            <dt>ID</dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MEMBERID)
+            </dd>
+
+            <dt>用户名</dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MEMBERNAME)
+            </dd>
+
+            <dt>用户状态</dt>
+
+            <dd>
+                @if (Model.MEMBERSTATE == 0)
+                {
+                    <font color="green">可用</font>
+                }
+                else
+                {
+                    <font color="red">冻结</font>
+                }
+            </dd>
+
+            <dt>预约上限</dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.RESERVELIMIT)
+            </dd>
+
+            <dt>借阅上限</dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UPPERLIMIT)
+            </dd>
+
+        </dl>
+    </div>
+</div>
+

@@ -1,0 +1,65 @@
+﻿@using WebApplication3.Models
+@model WebApplication3.Models.EBOOK
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>电子书状态信息</h2>
+
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            电子书类型
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EBOOKTYPE)
+        </dd>
+
+        <dt>
+            电子书名
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EBOOKNAME)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @if (Request.IsAuthenticated == false)
+    {
+        @Html.ActionLink("收藏", "Edit", new { id = Model.EBOOKID })
+    }
+    else
+    {
+        Model1 db = new Model1();
+        var member = db.MEMBERS.SqlQuery("select * from MEMBERS where MEMBERNAME='" + User.Identity.Name + "'");
+        string memberid = member.ToList().First().MEMBERID;
+        var collecting = db.EBOOK_COLL.SqlQuery("select * from EBOOK_COLL where MEMBERID='" + memberid + "'");
+        bool IsCollect = false;
+        foreach (var iter in collecting)
+        {
+            if (iter.EBOOKID == Model.EBOOKID)
+            {
+                IsCollect = true;
+                break;
+            }
+        }
+        if (IsCollect)
+        {
+            <font color="red">已收藏</font>
+        }
+        else
+         {
+            @Html.ActionLink("收藏", "Edit", new { id = Model.EBOOKID })
+         }
+        
+    }
+    |
+    @Html.ActionLink("回到电子书列表", "Index")
+</p>

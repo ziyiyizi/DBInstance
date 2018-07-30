@@ -1,0 +1,89 @@
+﻿@model IEnumerable<WebApplication3.Models.BOOK>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Member/MainPage.cshtml";
+}
+
+@using (Html.BeginForm("Index", "Member", FormMethod.Post, new { id = "searchForm", @class = "form-inline", @style = "text-align:center" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-inline" style="text-align:center">
+
+        <input type="hidden" id="PageIndex" name="PageIndex" value="0" />
+
+    </div>
+
+}
+<h2 class="sub-header">实体书收藏</h2>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <tr>
+            <th>
+                ISBN
+            </th>
+            <th>
+                图书名
+            </th>
+            <th>
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ISBN)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.BOOKNAME)
+                </td>
+
+                <td>
+                    @Html.ActionLink("取消收藏", "Edit", new { id = item.ISBN }) |
+                    @Html.ActionLink("详细信息", "Details", new { id = item.ISBN })
+
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <div id="pagebar">
+        @for (var i = 0; i < ViewBag.PageCount; i++)
+        {
+            if (i == ViewBag.PageIndex)
+            {
+                <span class="currentpagenumber">@(i + 1)</span>
+            }
+            else
+            {
+                <a class="pagenumber" href="javascript:;">@(i + 1)</a>
+            }
+        }
+    </div>
+
+</div>
+
+
+
+@section scripts {
+    <script>
+        function submitForm(pagenumber) {
+            pagenumber = parseInt(pagenumber, 10);
+            $('#PageIndex').val(pagenumber - 1);
+            $('#searchForm').submit();
+        }
+
+        $(function () {
+
+            $('#pagebar .pagenumber').click(function () {
+                submitForm($(this).text());
+            });
+
+        });
+
+
+    </script>
+}

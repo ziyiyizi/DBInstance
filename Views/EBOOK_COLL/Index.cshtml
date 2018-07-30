@@ -1,0 +1,47 @@
+﻿@model IEnumerable<WebApplication3.Models.EBOOK_COLL>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Member/MainPage.cshtml";
+}
+
+<h2>电子书收藏</h2>
+
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <tr>
+            <th>
+                电子书ID
+            </th>
+            <th>
+                电子书类型
+            </th>
+            <th>
+                电子书名
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EBOOKID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EBOOKTYPE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EBOOKNAME)
+                </td>
+                <td>
+                    @Html.ActionLink("取消收藏", "Edit", new { ebookid = item.EBOOKID, memberid = item.MEMBERID }) |
+                    @Html.ActionLink("详细信息", "Details", new { id = item.EBOOKID })
+                    
+                </td>
+            </tr>
+        }
+
+    </table>
+    </div>

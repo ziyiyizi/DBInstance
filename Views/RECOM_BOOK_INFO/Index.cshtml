@@ -1,0 +1,44 @@
+﻿@model IEnumerable<WebApplication3.Models.RECOM_BOOK_INFO>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ISBN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BOOKNAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RECOM_NUM)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ISBN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BOOKNAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RECOM_NUM)
+        </td>
+        <td>
+            
+        </td>
+    </tr>
+}
+
+</table>

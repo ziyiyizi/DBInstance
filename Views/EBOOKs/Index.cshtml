@@ -1,0 +1,138 @@
+﻿@using WebApplication3.Models
+@model IEnumerable<WebApplication3.Models.EBOOK>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm("Index", "EBOOKS", FormMethod.Post, new { id = "searchForm", @class = "form-inline", @style = "text-align:center" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-inline" style="text-align:center">
+
+        <input type="hidden" id="PageIndex" name="PageIndex" value="0" />
+
+    </div>
+
+}
+
+<h2>电子图书</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            电子图书ID
+        </th>
+        <th>
+            类型
+        </th>
+        <th>
+            电子图书名
+        </th>
+        <th></th>
+    </tr>
+    @if (Request.IsAuthenticated == false)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EBOOKID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EBOOKTYPE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EBOOKNAME)
+                </td>
+                <td>
+                    @Html.ActionLink("收藏", "Edit", new { id = item.EBOOKID }) |
+                    @Html.ActionLink("详细信息", "Details", new { id = item.EBOOKID })
+
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        Model1 db = new Model1();
+        var member = db.MEMBERS.SqlQuery("select * from MEMBERS where MEMBERNAME='" + User.Identity.Name + "'");
+        string memberid = member.ToList().First().MEMBERID;
+        var collecting = db.EBOOK_COLL.SqlQuery("select * from EBOOK_COLL where MEMBERID='" + memberid + "'");
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EBOOKID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EBOOKTYPE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EBOOKNAME)
+                </td>
+
+                <td>
+                    @{
+                bool IsCollect = false;
+                foreach (var iter in collecting)
+                {
+                    if (iter.EBOOKID == item.EBOOKID)
+                    {
+                        IsCollect = true;
+                        break;
+                    }
+                }
+                if (IsCollect)
+                {
+                            <font color="red">已收藏</font>
+                        }
+                else
+                {
+                    @Html.ActionLink("收藏", "Edit", new { id = item.EBOOKID })
+                        }
+            }
+                    |
+                    @Html.ActionLink("详细信息", "Details", new { id = item.EBOOKID })
+
+                </td>
+            </tr>
+        }
+    }
+
+
+</table>
+
+<div id="pagebar">
+    @for (var i = 0; i < ViewBag.PageCount; i++)
+    {
+        if (i == ViewBag.PageIndex)
+        {
+            <span class="currentpagenumber">@(i + 1)</span>
+        }
+        else
+        {
+            <a class="pagenumber" href="javascript:;">@(i + 1)</a>
+        }
+    }
+</div>
+
+@section scripts {
+    <script>
+        function submitForm(pagenumber) {
+            pagenumber = parseInt(pagenumber, 10);
+            $('#PageIndex').val(pagenumber - 1);
+            $('#searchForm').submit();
+        }
+
+        $(function () {
+            $('#pagebar .pagenumber').click(function () {
+                submitForm($(this).text());
+            });
+
+        });
+
+
+    </script>
+}

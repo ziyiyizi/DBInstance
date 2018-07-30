@@ -1,0 +1,43 @@
+﻿@model WebApplication3.Models.EBOOK_HIS
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>EBOOK_HIS</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MEMBERID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MEMBERID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BROWSETIME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BROWSETIME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EBOOKTYPE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EBOOKTYPE)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

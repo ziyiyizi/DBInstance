@@ -1,0 +1,51 @@
+﻿@model IEnumerable<WebApplication3.Models.INTERNALBOOKS>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>详细信息</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            图书状态
+        </th>
+        <th>
+            ISBN
+        </th>
+        <th>
+            书架号
+        </th>
+        <th>
+            楼层
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BOOKSTATE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ISBN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SHELFNUMBER)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FLOOR)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.BOOKID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.BOOKID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.BOOKID })
+        </td>
+    </tr>
+}
+
+</table>

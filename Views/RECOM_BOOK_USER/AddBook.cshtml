@@ -1,0 +1,52 @@
+﻿@model WebApplication3.Models.RECOM_BOOK_USER
+
+@using Microsoft.AspNet.Identity;
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>图书信息</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div>
+        <h4>添加推荐</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                ISBN
+            </dt>
+
+            <dd>
+                @ViewBag.isbn
+            </dd>
+
+            <dt>
+                书名
+            </dt>
+
+            <dd>
+                @ViewBag.bookname
+            </dd>
+        </dl>
+    </div>
+    <div class="form-group">
+        <table>
+            <tr>
+                <td>
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="确认" class="btn btn-default" />
+                    </div>
+                </td>
+                <td>
+                    <div class="col-md-offset-2 col-md-10">
+                        <input value="取消" class="btn btn-default" onclick="location.href='@Url.Action("Index", "RECOM_BOOK_USER", new {})'" />
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+}
+

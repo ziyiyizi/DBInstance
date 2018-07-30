@@ -1,0 +1,84 @@
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <title>@ViewBag.Title - 图书 ASP.NET 应用程序</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/Scripts/js")
+    <link href="~/Content/carousel.css" rel="stylesheet">
+
+</head>
+<body>
+    <br /><br /><br />
+    <div class="navbar-wrapper">
+        <div class="container">
+
+            <nav class="navbar navbar-inverse navbar-static-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">济迩图书信息管理</a>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li>@Html.ActionLink("主页", "MainPage", "Home")</li>
+                            <li>@Html.ActionLink("书籍一览", "Index", "Book_info")</li>
+                            <li>@Html.ActionLink("热门图书", "Index", "Book_hot")</li>
+                            <li>@Html.ActionLink("最新图书", "index", "BOOK_REG")</li>
+                            <li>@Html.ActionLink("电子文献", "index", "EBOOKs")</li>
+                            <li>@Html.ActionLink("预约图书室", "index", "ROOMRESERVATIONs")</li>
+                        </ul>
+
+
+                        @if (Request.IsAuthenticated)
+                        {
+                            using (Html.BeginForm("Logout", "Home", FormMethod.Post, new { id = "logoutForm" }))
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li>
+                                        @Html.ActionLink("你好 " + User.Identity.GetUserName() + "!", "Index", "Member", routeValues: null, htmlAttributes: new { title = "管理" })
+                                    </li>
+                                    <li><a href="javascript:document.getElementById('logoutForm').submit()">注销</a></li>
+                                </ul>
+                            }
+                        }
+                        else
+                        {
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>@Html.ActionLink("登录", "Logon", "Home", routeValues: new { Area = "Member" }, htmlAttributes: new { id = "loginLink" })</li>
+                            </ul>
+                        }
+
+                    </div>
+                </div>
+            </nav>
+
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer style="text-align:center">
+            <p>&copy; @DateTime.Now.Year -  ASP.NET 应用程序</p>
+        </footer>
+
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

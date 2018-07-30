@@ -1,0 +1,67 @@
+﻿@model IEnumerable<WebApplication3.Models.RECOM_BOOK_USER>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Member/MainPage.cshtml";
+}
+
+<h2>我的荐购书目</h2>
+
+<p>
+    @Html.ActionLink("推荐新的书目", "Create")
+</p>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ISBN)
+            </th>
+            <th>
+                图书名
+            </th>
+            <th>
+                是否已上架
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ISBN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BOOKNAME)
+                </td>
+                <td>
+                    @{
+                        if (item.ISPURCHASED == 0)
+                        {
+                            <font color="red">处理中</font>
+                        }
+                        else
+                        {
+                            <font color="green">已上架</font>
+                        }
+                    }
+                </td>
+
+                @{
+                    if (item.ISPURCHASED == 1)
+                    {
+                        <td>
+                            @Html.ActionLink("更多信息", "Details", new { id = item.ISBN })
+                        </td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
+                }
+
+            </tr>
+        }
+
+    </table>
+    </div>

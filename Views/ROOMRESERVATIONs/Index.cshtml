@@ -1,0 +1,95 @@
+﻿@model IEnumerable<WebApplication3.Models.ROOMRESERVATION>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>图书室占用情况</h2>
+
+@if (Request.IsAuthenticated)
+{
+    <p>
+        @Html.ActionLink("预约图书室", "Create", routeValues: new { Area = "Create" },htmlAttributes: new { @style="font-size:20px" })
+    </p>
+}
+else
+{
+    <p>
+        @Html.ActionLink("登录", "Logon", "Home", routeValues: new { Area = "Member" }, htmlAttributes: new { id = "loginLink",@style = "font-size:20px"  })
+    </p>
+}
+<div id="show_time0" style="">
+    <script>
+        setInterval("show_time0.innerHTML='现在时间是：' + new Date().toLocaleString()+' 星期'+'日一二三四五六'.charAt(new Date().getDay());", 1000);
+    </script>
+</div>
+
+@using (Html.BeginForm("Index", "ROOMRESERVATIONs", FormMethod.Post, new { id = "searchForm", @class = "form-inline", @style = "text-align:center" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-inline">
+        @Html.DropDownList("ROOMID", null, htmlAttributes: new { @class = "form-control" })
+        <input type="submit" class="form-control" id="searchButton" value="检索" />
+    </div>
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                图书室ID
+            </th>
+            <th>
+                预约时间
+            </th>
+            <th>
+                截至时间
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.STUDYROOM.ROOMID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RESERVETIME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DEADLINE)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (Request.IsAuthenticated)
+{
+    <a href="Return" class="btn btn-group-lg btn-default">我的预约</a>
+}
+
+
+@section scripts {
+    <script>
+        function submitForm(pagenumber) {
+            pagenumber = parseInt(pagenumber, 10);
+            $('#PageIndex').val(pagenumber - 1);
+            $('#searchForm').submit();
+        }
+
+        $(function () {
+
+            $('#searchButton').click(function () {
+                submitForm($('#pagebar .currentpagenumber').text());
+            });
+
+            $('#pagebar .pagenumber').click(function () {
+                submitForm($(this).text());
+            });
+
+        });
+    </script>
+}

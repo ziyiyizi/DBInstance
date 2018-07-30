@@ -1,0 +1,39 @@
+﻿@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "MainPage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/Scripts/js")
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li>@Html.ActionLink("个人资料", "MemberInfo", "Member") </li>
+                <li>@Html.ActionLink("更改密码", "SetPassWord", "Member") </li>
+            </ul>
+            <hr />
+            <ul class="nav nav-sidebar">
+                <li>@Html.ActionLink("实体书收藏", "Index", "Member")</li>
+                <li>@Html.ActionLink("电子书收藏", "Index", "EBOOK_COLL")</li>
+                <li>@Html.ActionLink("电子书浏览记录", "Index", "EBOOK_HIS")</li>
+            </ul>
+            <hr />
+            <ul class="nav nav-sidebar">
+                <li>@Html.ActionLink("荐购图书", "index", "RECOM_BOOK_USER", new { id = User.Identity.GetUserName() }, new { })</li>
+                <li>@Html.ActionLink("预约图书", "Index", "BOOKRERSERVATIONs")</li>
+                <li>@Html.ActionLink("预约研习室", "myReserve", "ROOMRESERVATIONs")</li>
+            </ul>
+        </div>
+        <div>
+
+            @RenderBody()
+
+
+        </div>
+    </div>
+</div>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)

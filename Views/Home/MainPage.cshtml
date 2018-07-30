@@ -1,0 +1,222 @@
+﻿@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img class="first-slide" src="~/src/slide-pic1.jpg" alt="First slide">
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1>欢迎来到济迩图书信息管理系统！</h1>
+                    <p>推荐登录以享受更多的功能</p>
+                    <p>
+                        @if (Request.IsAuthenticated)
+                        {
+                            <a class="btn btn-lg btn-primary" href="/Member/MemberInfo" role="button">个人中心 &raquo;</a>
+                        }
+                        else
+                        {
+                            <a class="btn btn-lg btn-primary" href="/Home/Logon" role="button">立即登录 &raquo;</a>
+                        }
+
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img class="second-slide" src="~/src/slide-pic2.jpg" alt="Second slide">
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1>我们的系统具有分类检索的功能</h1>
+                    <p>您可以在分类检索界面中选择特定种类的图书，并将其放入您的收藏</p>
+                    <p><a class="btn btn-lg btn-primary" href="/Book_info/index" role="button">分类浏览 &raquo;</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img class="third-slide" src="~/src/slide-pic3.jpg" alt="Third slide">
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1>马上去预约图书室</h1>
+                    <p>您可以提交想要使用图书室的时间，等待管理人员审核</p>
+                    <p><a class="btn btn-lg btn-primary" href="/ROOMRESERVATIONs/index" role="button">预约中心 &raquo;</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+<hr />
+<div class="container marketing">
+    <div class="row">
+        <div class="col-lg-3">
+            <p><a class="btn btn-lg btn-primary" href="/Book_hot/Index" role="button">热门图书 &raquo;</a></p>
+        </div>
+    </div>
+    <hr class="">
+    <!-- Three columns of text below the carousel -->
+    <div class="row">
+        <div class="col-lg-4">
+            <img class="img-circle" src="~/src/book-pic1.jpg" alt="Generic placeholder image" width="140" height="140">
+            <h2>解忧杂货铺</h2>
+            <p>
+                《解忧杂货店》是日本作家东野圭吾写作的长篇小说。2011年于《小说野性时代》连载，于2012年3月由角川书店发行单行本。该书讲述了在僻静街道旁的一家杂货店，只要写下烦恼投进店前门卷帘门的投信口，第二天就会在店后的牛奶箱里得到回答：因男友身患绝症，年轻女孩月兔在爱情与梦想间徘徊；松冈克郎为了音乐梦想离家漂泊，却在现实中寸步难行；少年浩介面临家庭巨变，挣扎在亲情与未来的迷茫中……他们将困惑写成信投进杂货店，奇妙的事情随即不断发生。
+            </p>
+
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+            <img class="img-circle" src="~/src/book-pic2.jpg" alt="Generic placeholder image" width="140" height="140">
+            <h2>c++从入门到入土</h2>
+            <p>《c++从入门到精通（第3版）》一书从初学者的角度出发，以通俗易懂的语言，配合丰富的实例，详细讲解了C++语言的基础知识。</p>
+
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+            <img class="img-circle" src="~/src/book-pic3.jpg" alt="Generic placeholder image" width="140" height="140">
+            <h2>python爬虫入门</h2>
+            <p>Scrapy一个开源和协作的框架，其最初是为了页面抓取 (更确切来说, 网络抓取 )所设计的，使用它可以以快速、简单、可扩展的方式从网站中提取所需的数据。但目前Scrapy的用途十分广泛，可用于如数据挖掘、监测和自动化测试等领域，也可以应用在获取API所返回的数据(例如 Amazon Associates Web Services ) 或者通用的网络爬虫。</p>
+
+        </div><!-- /.col-lg-4 -->
+    </div><!-- /.row -->
+    <!-- START THE FEATURETTES -->
+    <div class="row">
+        <div class="col-lg-4">
+            <p><a class="btn btn-default" href="Book_info/MoreDetails/9787544270878" role="button">更多细节 &raquo;</a></p>
+        </div>
+        <div class="col-lg-4">
+            <p><a class="btn btn-default" href="Book_info/MoreDetails/9787302288473" role="button">更多细节 &raquo;</a></p>
+        </div>
+        <div class="col-lg-4">
+            <p><a class="btn btn-default" href="Book_info/MoreDetails/9787111563877" role="button">更多细节 &raquo;</a></p>
+        </div>
+    </div>
+    <hr class="featurette-divider">
+
+    <div class="row">
+        <div class="col-lg-3">
+            <p><a class="btn btn-lg btn-primary" href="/Book_info/Index" role="button">分类检索 &raquo;</a></p>
+        </div>
+    </div>
+    <hr class="">
+    <!-- Three columns of text below the carousel -->
+    <div class="row">
+        <div class="col-lg-3">
+            <img class="img-circle" src="~/src/Classfy/classsfy-1.jpg" alt="Generic placeholder image" width="140" height="140">
+            <h2>@Html.ActionLink("文学", "MajorClassify", "Book_info", new { id = "文学" }, "")</h2>
+        </div><!-- /.col-lg-4 -->
+
+        <div class="col-lg-3">
+            <img class="img-circle" src="~/src/Classfy/classsfy-2.jpg" alt="Generic placeholder image" width="140" height="140">
+            <h2>@Html.ActionLink("计算机", "MajorClassify", "Book_info", new { id = "计算机" }, "")</h2>
+        </div><!-- /.col-lg-4 -->
+
+        <div class="col-lg-3">
+            <img class="img-circle" src="~/src/Classfy/classsfy-3.jpg" alt="Generic placeholder image" width="140" height="140">
+            <h2>@Html.ActionLink("历史", "MajorClassify", "Book_info", new { id = "历史" }, "")</h2>
+        </div><!-- /.col-lg-4 -->
+
+        <div class="col-lg-3">
+            <img class="img-circle" src="~/src/Classfy/classsfy-4.jpg" alt="Generic placeholder image" width="140" height="140">
+            <h2>@Html.ActionLink("社会科学", "MajorClassify", "Book_info", new { id = "社会科学" }, "")</h2>
+        </div><!-- /.col-lg-4 -->
+
+    </div><!-- /.row -->
+
+    <div class="row">
+        <div class="col-lg-3">
+            <img class="img-circle" src="~/src/Classfy/classsfy-5.jpg" alt="Generic placeholder image" width="140" height="140">
+            <h2>@Html.ActionLink("工业技术", "MajorClassify", "Book_info", new { id = "工业技术" }, "")</h2>
+        </div><!-- /.col-lg-4 -->
+
+        <div class="col-lg-3">
+            <img class="img-circle" src="~/src/Classfy/classsfy-6.jpg" alt="Generic placeholder image" width="140" height="140">
+            <h2>@Html.ActionLink("文化", "MajorClassify", "Book_info", new { id = "文化" }, "")</h2>
+        </div><!-- /.col-lg-4 -->
+
+        <div class="col-lg-3">
+            <img class="img-circle" src="~/src/Classfy/classsfy-7.jpg" alt="Generic placeholder image" width="140" height="140">
+            <h2>@Html.ActionLink("政治", "MajorClassify", "Book_info", new { id = "政治" }, "")</h2>
+        </div><!-- /.col-lg-4 -->
+
+        <div class="col-lg-3">
+            <img class="img-circle" src="~/src/Classfy/classsfy-8.jpg" alt="Generic placeholder image" width="140" height="140">
+            <h2>@Html.ActionLink("军事", "MajorClassify", "Book_info", new { id = "军事" }, "")</h2>
+        </div><!-- /.col-lg-4 -->
+
+    </div><!-- /.row -->
+    <!-- START THE FEATURETTES -->
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+        <div class="col-md-7">
+            <h2 class="featurette-heading">我们的图书系统存储有三类图书，<span class="text-muted">它们都将提供给用户。</span></h2>
+            <p class="lead">分别是杂志期刊，实体书藉与电子书。您可以选择预约实体书籍（需要登录），或者浏览电子书与杂志期刊。</p>
+        </div>
+        <div class="col-md-5">
+            <img class="featurette-image img-responsive center-block" src="~/src/book-pic.png" alt="Generic placeholder image">
+        </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+        <div class="col-md-7 col-md-push-5">
+            <h2 class="featurette-heading">我们的图书系统会向您推荐热门图书以及最新图书。<span class="text-muted">如果您有兴趣的话，不妨去试试。</span></h2>
+            <p class="lead">最新图书根据图书最近的入库时间展示，而热门图书根据浏览量、借阅量展示。</p>
+        </div>
+        <div class="col-md-5 col-md-pull-7">
+            <a href="/Book_reg/index"><img class="featurette-image img-responsive center-block" src="~/src/book-pic.png" alt="Generic placeholder image"></a>
+</div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+        <div class="col-md-7">
+            <h2 class="featurette-heading">我们的图书系统提供图书室预约的功能。<span class="text-muted">预约功能需要您登录。</span></h2>
+            <p class="lead">您可以登录我们的系统快捷地预约图书室，如果预约成功，您可在预约时间内使用我们图书馆的图书室。</p>
+        </div>
+        <div class="col-md-5">
+            <a href="/ROOMRESERVATIONs/index"><img class="featurette-image img-responsive center-block" src="~/src/book-pic.png" alt="Generic placeholder image"></a>
+        </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+        <div class="col-md-7 col-md-push-5">
+            <h2 class="featurette-heading">您可以从导航栏进入个人管理中心。<span class="text-muted">该功能需要您登录。</span></h2>
+            <p class="lead">您可以在个人管理中心中找到预约的图书以及图书室，还能修改个人信息等。</p>
+        </div>
+        <div class="col-md-5 col-md-pull-7">
+            <a href="/Member/MemberInfo"><img class="featurette-image img-responsive center-block" src="~/src/book-pic.png" alt="Generic placeholder image"></a>
+        </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <!-- /END THE FEATURETTES -->
+    <!-- FOOTER -->
+    <footer>
+        <p class="pull-right"><a href="#">回到顶部</a></p>
+        <p><a href="#">隐私</a> &middot; <a href="#">条款</a></p>
+    </footer>
+
+</div><!-- /.container -->

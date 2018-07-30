@@ -1,0 +1,51 @@
+﻿@model WebApplication3.Models.BOOKRERSERVATION
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>详细信息</h2>
+
+<div>
+    <h4>BOOKRERSERVATION</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BOOK.BOOKNAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BOOK.BOOKNAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MEMBER.PASSWORDS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MEMBER.PASSWORDS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DEADLINE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DEADLINE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RESERVESTATE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RESERVESTATE)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new {  id = Model.ISBN  }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

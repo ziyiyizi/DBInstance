@@ -1,0 +1,91 @@
+﻿@model IEnumerable<WebApplication3.Models.BOOK_REG>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm("Index", "Book_reg", FormMethod.Post, new { id = "searchForm", @class = "form-inline", @style = "text-align:center" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-inline" style="text-align:center">
+
+        <input type="hidden" id="PageIndex" name="PageIndex" value="0" />
+
+    </div>
+
+}
+<h2>最新图书</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            图书ID
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ISBN)
+        </th>
+        <th>
+            图书名
+        </th>
+        <th>
+            入库时间
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BOOKID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ISBN)
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.BOOKNAME)*@
+                @Html.ActionLink(item.BOOKNAME, "MoreDetails", "Book_info",new { id = item.ISBN },"")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MAINTAINTIME)
+            </td>
+            <td>
+                @Html.ActionLink("状态信息", "Details", new { id = item.ISBN })
+                
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div id="pagebar">
+    @for (var i = 0; i < ViewBag.PageCount; i++)
+    {
+        if (i == ViewBag.PageIndex)
+        {
+            <span class="currentpagenumber">@(i + 1)</span>
+        }
+        else
+        {
+            <a class="pagenumber" href="javascript:;">@(i + 1)</a>
+        }
+    }
+</div>
+@section scripts {
+    <script>
+        function submitForm(pagenumber) {
+            pagenumber = parseInt(pagenumber, 10);
+            $('#PageIndex').val(pagenumber - 1);
+            $('#searchForm').submit();
+        }
+
+        $(function () {
+            $('#pagebar .pagenumber').click(function () {
+                submitForm($(this).text());
+            });
+
+        });
+
+
+    </script>
+}

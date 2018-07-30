@@ -1,0 +1,86 @@
+﻿@model IEnumerable<WebApplication3.Models.INTERNALBOOKS>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    string name = "";
+    string ISBN = "";
+}
+@foreach (var item in Model)
+{
+    name = item.BOOK.BOOKNAME;
+    ISBN = item.ISBN;
+}
+<h2>@name</h2>
+<p>
+    @Html.ActionLink("没有可借出图书，我要预约", "Reserve", new { id = ISBN })
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            图书ID
+        </th>
+        <th>
+            ISBN
+        </th>
+        <th>
+            图书状态
+        </th>
+        <th>
+            楼层
+        </th>
+        <th>
+            书架号
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BOOKID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ISBN)
+        </td>
+        @{
+            if (item.BOOKSTATE == 0)
+            {
+                <td>
+                    <font color="green">正常</font>
+                </td>
+            }
+            else if (item.BOOKSTATE == 1)
+            {
+                <td>
+                    <font color="red">已借出</font>
+                </td>
+            }
+            else if (item.BOOKSTATE == 2)
+            {
+                <td>
+                    <font color="red">丢失</font>
+                </td>
+            }
+        }
+        <td>
+            @Html.DisplayFor(modelItem => item.FLOOR)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SHELFNUMBER)
+        </td>
+        <td>
+            
+        </td>
+
+
+        <td></td>
+    </tr>
+    }
+
+</table>

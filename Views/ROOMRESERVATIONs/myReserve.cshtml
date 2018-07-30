@@ -1,0 +1,52 @@
+﻿@model IEnumerable<WebApplication3.Models.ROOMRESERVATION>
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Member/MainPage.cshtml";
+}
+
+<h2>我的预约研习室</h2>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <tr>
+            <th>
+                图书室ID
+            </th>
+            <th>
+                预约时间
+            </th>
+            <th>
+                截至时间
+            </th>
+            <th>
+                人数
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ROOMID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RESERVETIME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DEADLINE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NUMOFPEOPLE)
+                </td>
+
+                <td>
+                    
+
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

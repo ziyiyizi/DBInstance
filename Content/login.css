@@ -1,0 +1,33 @@
+﻿* {
+    margin: 0;
+    padding: 0
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    position: relative;
+}
+
+
+.outer-wrap {
+    /*只有同时为html和body设置height: 100%时，这里才生效，
+            并且随浏览器窗口变化始终保持和浏览器视窗等高*/
+    height: 100%;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.login-panel {
+    width: 400px;
+    height: 400px;
+    background-color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    border-radius:10px;
+}
